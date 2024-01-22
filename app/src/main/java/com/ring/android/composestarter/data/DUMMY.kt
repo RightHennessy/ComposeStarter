@@ -1,4 +1,6 @@
-package com.ring.android.composestarter
+package com.ring.android.composestarter.data
+
+import com.ring.android.composestarter.domain.Memo
 
 val DUMMY_DATA = mutableListOf(
     Memo(

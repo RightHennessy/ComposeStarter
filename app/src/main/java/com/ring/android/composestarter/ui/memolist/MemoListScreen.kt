@@ -20,8 +20,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ring.android.composestarter.DUMMY_DATA
-import com.ring.android.composestarter.Memo
+import com.ring.android.composestarter.data.DUMMY_DATA
+import com.ring.android.composestarter.domain.Memo
 
 @Preview(showSystemUi = true)
 @Composable

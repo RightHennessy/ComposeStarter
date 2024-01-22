@@ -4,8 +4,8 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.ring.android.composestarter.DUMMY_DATA
-import com.ring.android.composestarter.Memo
+import com.ring.android.composestarter.data.DUMMY_DATA
+import com.ring.android.composestarter.domain.Memo
 
 class EditViewModel : ViewModel() {
 
