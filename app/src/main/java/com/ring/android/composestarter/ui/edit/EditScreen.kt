@@ -2,6 +2,7 @@ package com.ring.android.composestarter.ui.edit
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -30,19 +31,19 @@ import androidx.compose.ui.unit.sp
 @Preview(showSystemUi = true)
 @Composable
 fun EditScreenPreview() {
-    EditScreen()
+    EditScreen { }
 }
 
 @Composable
-fun EditScreen() {
+fun EditScreen(moveToMemoList: () -> Unit) {
     Column {
-        MemoEditHeader()
+        MemoEditHeader(moveToMemoList)
         MemoEdit()
     }
 }
 
 @Composable
-fun MemoEditHeader() {
+fun MemoEditHeader(moveToMemoList: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -58,7 +59,8 @@ fun MemoEditHeader() {
             modifier = Modifier
                 .border(1.dp, color = Color.Gray)
                 .background(color = Color.Gray)
-                .padding(4.dp),
+                .padding(4.dp)
+                .clickable { moveToMemoList() },
         )
     }
 }
@@ -66,7 +68,7 @@ fun MemoEditHeader() {
 @Preview(showBackground = true)
 @Composable
 fun MemoEditHeaderPreview() {
-    MemoEditHeader()
+    MemoEditHeader {}
 }
 
 @Composable

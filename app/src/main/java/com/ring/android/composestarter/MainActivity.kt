@@ -9,21 +9,34 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.ring.android.composestarter.ui.memolist.MemoList
+import com.ring.android.composestarter.ui.ScreenState.EDIT
+import com.ring.android.composestarter.ui.ScreenState.MEMO_LIST
+import com.ring.android.composestarter.ui.edit.EditScreen
+import com.ring.android.composestarter.ui.memolist.MemoListScreen
 import com.ring.android.composestarter.ui.theme.ComposeStarterTheme
 
 class MainActivity : ComponentActivity() {
+    private val viewModel: MainViewModel = MainViewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ComposeStarterTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    MemoList(memos = DUMMY_DATA)
-                }
+            Screen(viewModel)
+        }
+    }
+}
+
+@Composable
+fun Screen(viewModel: MainViewModel) {
+    ComposeStarterTheme {
+        // A surface container using the 'background' color from the theme
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background,
+        ) {
+            when (viewModel.screenState.value) {
+                MEMO_LIST -> MemoListScreen(viewModel::moveToEdit)
+                EDIT -> EditScreen(viewModel::moveToMemoList)
             }
         }
     }
@@ -32,13 +45,5 @@ class MainActivity : ComponentActivity() {
 @Preview(showSystemUi = true)
 @Composable
 fun AppPreview() {
-    ComposeStarterTheme {
-        // A surface container using the 'background' color from the theme
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            MemoList(memos = DUMMY_DATA)
-        }
-    }
+    Screen(MainViewModel())
 }

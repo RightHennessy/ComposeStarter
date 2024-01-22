@@ -2,6 +2,7 @@ package com.ring.android.composestarter.ui.memolist
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,13 +26,13 @@ import com.ring.android.composestarter.Memo
 @Preview(showSystemUi = true)
 @Composable
 fun MemoListScreenPreview() {
-    MemoListScreen()
+    MemoListScreen {}
 }
 
 @Composable
-fun MemoListScreen() {
+fun MemoListScreen(moveToEdit: () -> Unit) {
     Column {
-        MemoListHeader()
+        MemoListHeader(moveToEdit)
         MemoList(memos = DUMMY_DATA)
     }
 }
@@ -47,7 +48,7 @@ fun MemoList(memos: List<Memo>) {
 }
 
 @Composable
-fun MemoListHeader() {
+fun MemoListHeader(moveToEdit: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -63,7 +64,8 @@ fun MemoListHeader() {
             modifier = Modifier
                 .border(1.dp, color = Color.Gray)
                 .background(color = Color.Gray)
-                .padding(4.dp),
+                .padding(4.dp)
+                .clickable { moveToEdit() },
         )
     }
 }
@@ -71,7 +73,7 @@ fun MemoListHeader() {
 @Preview(showBackground = true)
 @Composable
 fun MemoListHeaderPreview() {
-    MemoListHeader()
+    MemoListHeader {}
 }
 
 
