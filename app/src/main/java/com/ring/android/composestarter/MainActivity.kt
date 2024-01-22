@@ -38,7 +38,27 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@Preview(showSystemUi = true)
+@Composable
+fun AppPreview() {
+    ComposeStarterTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            MemoList(memos = DUMMY_DATA)
+        }
+    }
+}
 
+@Composable
+fun MemoList(memos: List<Memo>) {
+    LazyColumn {
+        itemsIndexed(memos) { idx, item ->
+            MemoItem(memo = item)
+        }
+    }
+}
 
 @Composable
 fun MemoItem(memo: Memo) {
