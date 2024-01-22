@@ -52,7 +52,7 @@ fun MemoListHeader(moveToEdit: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp, horizontal = 8.dp),
+            .padding(vertical = 10.dp, horizontal = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {

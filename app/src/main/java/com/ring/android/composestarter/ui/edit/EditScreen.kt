@@ -15,15 +15,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,19 +26,19 @@ import androidx.compose.ui.unit.sp
 @Preview(showSystemUi = true)
 @Composable
 fun EditScreenPreview() {
-    EditScreen { }
+    EditScreen(EditViewModel(), {})
 }
 
 @Composable
-fun EditScreen(moveToMemoList: () -> Unit) {
+fun EditScreen(editViewModel: EditViewModel = EditViewModel(), moveToMemoList: () -> Unit) {
     Column {
-        MemoEditHeader(moveToMemoList)
-        MemoEdit()
+        MemoEditHeader(moveToMemoList, editViewModel)
+        MemoEdit(editViewModel)
     }
 }
 
 @Composable
-fun MemoEditHeader(moveToMemoList: () -> Unit) {
+fun MemoEditHeader(moveToMemoList: () -> Unit, editViewModel: EditViewModel) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -60,7 +55,10 @@ fun MemoEditHeader(moveToMemoList: () -> Unit) {
                 .border(1.dp, color = Color.Gray)
                 .background(color = Color.Gray)
                 .padding(4.dp)
-                .clickable { moveToMemoList() },
+                .clickable {
+                    editViewModel.saveMemo()
+                    moveToMemoList()
+                },
         )
     }
 }
@@ -68,18 +66,15 @@ fun MemoEditHeader(moveToMemoList: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun MemoEditHeaderPreview() {
-    MemoEditHeader {}
+    MemoEditHeader({}, EditViewModel())
 }
 
 @Composable
-fun MemoEdit() {
-    var title by remember { mutableStateOf(TextFieldValue("")) }
-    var content by remember { mutableStateOf(TextFieldValue("")) }
-
+fun MemoEdit(editViewModel: EditViewModel) {
     Column {
         TextField(
-            value = title,
-            onValueChange = { input -> title = input },
+            value = editViewModel.memo.value.title,
+            onValueChange = { input -> editViewModel.updateTitle(input = input) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(IntrinsicSize.Min),
@@ -90,8 +85,8 @@ fun MemoEdit() {
             )
         )
         TextField(
-            value = content,
-            onValueChange = { input -> content = input },
+            value = editViewModel.memo.value.content,
+            onValueChange = { input -> editViewModel.updateContent(input) },
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(),
@@ -106,5 +101,5 @@ fun MemoEdit() {
 @Preview(showSystemUi = true)
 @Composable
 fun MemoEditPreview() {
-    MemoEdit()
+    MemoEdit(EditViewModel())
 }

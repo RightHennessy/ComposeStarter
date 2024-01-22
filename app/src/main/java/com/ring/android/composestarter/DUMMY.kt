@@ -1,6 +1,6 @@
 package com.ring.android.composestarter
 
-val DUMMY_DATA = listOf(
+val DUMMY_DATA = mutableListOf(
     Memo(
         "안녕",
         "나는 자두야 나는 자두야 나는 자두야 나는 자두야 나는 자두야 나는 자두야 나는 자두야 나는 자두야 나는 자두야 나는 자두야 나는 자두야 나는 자두야 나는 자두야 나는 자두야",

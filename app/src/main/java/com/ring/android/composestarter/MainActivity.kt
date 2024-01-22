@@ -36,7 +36,7 @@ fun Screen(viewModel: MainViewModel) {
         ) {
             when (viewModel.screenState.value) {
                 MEMO_LIST -> MemoListScreen(viewModel::moveToEdit)
-                EDIT -> EditScreen(viewModel::moveToMemoList)
+                EDIT -> EditScreen(moveToMemoList = viewModel::moveToMemoList)
             }
         }
     }
