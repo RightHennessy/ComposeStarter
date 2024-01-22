@@ -46,7 +46,10 @@ fun MemoEditHeader(moveToMemoList: () -> Unit, editViewModel: EditViewModel) {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(text = "메모 편집", fontSize = 20.sp)
+
+        Text(text = "뒤로가기", fontSize = 12.sp, modifier = Modifier.clickable {
+            moveToMemoList()
+        })
         Text(
             text = "완료",
             color = Color.White,
