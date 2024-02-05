@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,12 +37,15 @@ fun MemoListScreen(
 ) {
     Column {
         MemoListHeader(moveToEdit)
-        MemoList(memos = memoListViewModel.getMemos())
+        MemoList(memoListViewModel)
     }
 }
 
 @Composable
-fun MemoList(memos: List<Memo>) {
+fun MemoList(viewModel: MemoListViewModel) {
+    viewModel.getMemos()
+    val memos by viewModel.memos
+
     LazyColumn(
     ) {
         itemsIndexed(memos) { idx, item ->

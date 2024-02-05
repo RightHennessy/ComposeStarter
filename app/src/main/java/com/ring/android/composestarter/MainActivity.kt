@@ -35,7 +35,7 @@ fun Screen(viewModel: MainViewModel) {
             color = MaterialTheme.colorScheme.background,
         ) {
             when (viewModel.screenState.value) {
-                MEMO_LIST -> MemoListScreen(viewModel::moveToEdit)
+                MEMO_LIST -> MemoListScreen(moveToEdit = viewModel::moveToEdit)
                 EDIT -> EditScreen(moveToMemoList = viewModel::moveToMemoList)
             }
         }
