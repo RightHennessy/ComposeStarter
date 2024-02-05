@@ -91,6 +91,20 @@ fun MemoEdit(editViewModel: EditViewModel = viewModel(factory = EditViewModel.Fa
                 unfocusedContainerColor = Color.White
             )
         )
+
+        TextField(
+            value = editViewModel.memo.value.image ?: "",
+            onValueChange = { input -> editViewModel.updateImage(input = input) },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(IntrinsicSize.Min),
+            singleLine = true,
+            textStyle = TextStyle.Default.copy(fontSize = 16.sp),
+            colors = TextFieldDefaults.colors(
+                unfocusedContainerColor = Color.White
+            )
+        )
+
         TextField(
             value = editViewModel.memo.value.content,
             onValueChange = { input -> editViewModel.updateContent(input) },

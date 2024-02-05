@@ -35,6 +35,10 @@ class EditViewModel(
         _memo.value = memo.value.copy(title = input)
     }
 
+    fun updateImage(input: String?) {
+        _memo.value = memo.value.copy(image = input)
+    }
+
     fun updateContent(input: String) {
         _memo.value = memo.value.copy(content = input)
     }
