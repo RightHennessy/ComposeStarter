@@ -12,8 +12,9 @@ import com.ring.android.composestarter.MemoApplication
 import com.ring.android.composestarter.data.MemoDatabase
 import com.ring.android.composestarter.data.repository.MemoRepository
 import com.ring.android.composestarter.domain.Memo
-import kotlinx.coroutines.async
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MemoListViewModel(
     private val memoRepository: MemoRepository
@@ -23,11 +24,13 @@ class MemoListViewModel(
         get() = _memos
 
     fun getMemos() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             runCatching {
                 memoRepository.getMemos()
             }.onSuccess {
-                _memos.value = it
+                withContext(Dispatchers.Main) {
+                    _memos.value = it
+                }
             }
         }
     }
