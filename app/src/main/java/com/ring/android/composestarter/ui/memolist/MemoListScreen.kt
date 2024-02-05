@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ring.android.composestarter.data.DUMMY_DATA
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ring.android.composestarter.domain.Memo
 
 @Preview(showSystemUi = true)
@@ -30,10 +30,13 @@ fun MemoListScreenPreview() {
 }
 
 @Composable
-fun MemoListScreen(moveToEdit: () -> Unit) {
+fun MemoListScreen(
+    memoListViewModel: MemoListViewModel = viewModel(factory = MemoListViewModel.Factory),
+    moveToEdit: () -> Unit
+) {
     Column {
         MemoListHeader(moveToEdit)
-        MemoList(memos = DUMMY_DATA)
+        MemoList(memos = memoListViewModel.getMemos())
     }
 }
 
@@ -95,5 +98,5 @@ fun MemoItem(memo: Memo) {
 @Preview(showBackground = true)
 @Composable
 fun MemoItemPreview() {
-    MemoItem(memo = DUMMY_DATA[0])
+    MemoItem(memo = Memo.DEFAULT)
 }
