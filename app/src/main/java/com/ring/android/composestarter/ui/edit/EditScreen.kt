@@ -80,7 +80,8 @@ fun MemoEditHeaderPreview() {
 fun MemoEdit(editViewModel: EditViewModel = viewModel(factory = EditViewModel.Factory)) {
     Column {
         TextField(
-            value = editViewModel.memo.value.title,
+            // value = editViewModel.memo.value.title,
+            value = "",
             onValueChange = { input -> editViewModel.updateTitle(input = input) },
             modifier = Modifier
                 .fillMaxWidth()
@@ -89,11 +90,13 @@ fun MemoEdit(editViewModel: EditViewModel = viewModel(factory = EditViewModel.Fa
             textStyle = TextStyle.Default.copy(fontSize = 16.sp),
             colors = TextFieldDefaults.colors(
                 unfocusedContainerColor = Color.White
-            )
+            ),
+            label = { Text(text = "제목을 입력해주세요") }
         )
 
         TextField(
-            value = editViewModel.memo.value.image ?: "",
+            // value = editViewModel.memo.value.image ?: "",
+            value = "",
             onValueChange = { input -> editViewModel.updateImage(input = input) },
             modifier = Modifier
                 .fillMaxWidth()
@@ -102,11 +105,13 @@ fun MemoEdit(editViewModel: EditViewModel = viewModel(factory = EditViewModel.Fa
             textStyle = TextStyle.Default.copy(fontSize = 16.sp),
             colors = TextFieldDefaults.colors(
                 unfocusedContainerColor = Color.White
-            )
+            ),
+            label = { Text(text = "이미지를 입력해주세요") }
         )
 
         TextField(
-            value = editViewModel.memo.value.content,
+            // value = editViewModel.memo.value.content,
+            value = "",
             onValueChange = { input -> editViewModel.updateContent(input) },
             modifier = Modifier
                 .fillMaxWidth()
@@ -114,7 +119,8 @@ fun MemoEdit(editViewModel: EditViewModel = viewModel(factory = EditViewModel.Fa
             textStyle = TextStyle.Default.copy(fontSize = 16.sp),
             colors = TextFieldDefaults.colors(
                 unfocusedContainerColor = Color.White
-            )
+            ),
+            label = { Text(text = "내용을 입력해주세요") }
         )
     }
 }
