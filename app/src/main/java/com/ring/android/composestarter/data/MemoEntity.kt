@@ -14,7 +14,7 @@ data class MemoEntity(
     @ColumnInfo(name = COLUMN_IMAGE) val image: String?
 ) {
     companion object {
-        const val TABLE_NAME = "momo"
+        const val TABLE_NAME = "memo"
         const val COLUMN_ID = "id"
         const val COLUMN_TITLE = "title"
         const val COLUMN_CONTENT = "content"

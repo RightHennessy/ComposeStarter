@@ -22,15 +22,19 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Preview(showSystemUi = true)
 @Composable
 fun EditScreenPreview() {
-    EditScreen(EditViewModel(), {})
+    EditScreen {}
 }
 
 @Composable
-fun EditScreen(editViewModel: EditViewModel = EditViewModel(), moveToMemoList: () -> Unit) {
+fun EditScreen(
+    editViewModel: EditViewModel = viewModel(factory = EditViewModel.Factory),
+    moveToMemoList: () -> Unit
+) {
     Column {
         MemoEditHeader(moveToMemoList, editViewModel)
         MemoEdit(editViewModel)
@@ -69,11 +73,11 @@ fun MemoEditHeader(moveToMemoList: () -> Unit, editViewModel: EditViewModel) {
 @Preview(showBackground = true)
 @Composable
 fun MemoEditHeaderPreview() {
-    MemoEditHeader({}, EditViewModel())
+    MemoEditHeader({}, viewModel())
 }
 
 @Composable
-fun MemoEdit(editViewModel: EditViewModel) {
+fun MemoEdit(editViewModel: EditViewModel = viewModel(factory = EditViewModel.Factory)) {
     Column {
         TextField(
             value = editViewModel.memo.value.title,
@@ -104,5 +108,5 @@ fun MemoEdit(editViewModel: EditViewModel) {
 @Preview(showSystemUi = true)
 @Composable
 fun MemoEditPreview() {
-    MemoEdit(EditViewModel())
+    MemoEdit(viewModel())
 }
